@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: http://wkaa.github.io/
+url: https://wkaa.github.io/
 date_format: "ordinal"
 title: wk
 subtitle: "NONE"
