@@ -4,8 +4,8 @@
 baseurl:
 url: https://wkaa.github.io/
 date_format: "ordinal"
-title: wk
-subtitle: "NONE"
+title: wk's blog
+subtitle: "wk的博客啦"
 description: "wk的个人博客"
 keywords: wk
 favicon: /favicon.ico
