@@ -78,7 +78,7 @@ collections:
         output: true
         permalink: /wiki/:path/
 
-repository: mzlogin/mzlogin.github.io
+repository: wkaa/wkaa.github.io
 
 # ---------------- #
 #      Comments    #
@@ -95,8 +95,8 @@ gitment:
     owner: wkaa
     repo: blog-comments
     oauth:
-        client_id: d2e1cbbd298958076462
-        client_secret: b42a4178e5fd4a7cf63189ef4b1453b05c375709
+        client_id: 78dc60d07e9cefa11b47
+        client_secret: b7248db21358264b3913a6818b89bec29d9a2d8f
 # 在使用其它评论组件时可点击显示 Disqus
 lazy_load_disqus : true
 
