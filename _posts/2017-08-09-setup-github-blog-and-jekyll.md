@@ -6,7 +6,7 @@ description: 网上的教程不靠谱,东拼西凑总算搞出来了,总结一�
 keywords: 教程
 ---
 
-折腾了老大功夫总算搭建了github博客还有本地的jekyll(windows),在这里总结一下
+　　折腾了老大功夫总算搭建了github博客还有本地的jekyll(windows),在这里总结一下
 
 ## github博客
 
