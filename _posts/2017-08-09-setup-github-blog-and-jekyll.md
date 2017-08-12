@@ -58,7 +58,7 @@ keywords: 教程
 　　然后就是在命令行里
 
 ```
-gem install jekyll github-pages
+gem install jekyll github-pages tzinfo-data
 ```
 
 　　这样都安装好以后就可以去你的工程目录下开启server了,指令是
