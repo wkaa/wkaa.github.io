@@ -94,7 +94,7 @@ control egress {
 
 ### 分析
 
-　　稍微解释一下，header的头部申明比较好理解，就类似c语言，fields里面的数字就类似struct的位段，表示这个变量占几位，这里面申明了两个头部`easyroute_head`和`easyroute_port`，`easyroute_head`包括了前导码和计数值，`easyroute_port`就是下一跳的port口
+　　稍微解释一下，header的头部申明比较好理解，就类似c语言，fields里面的数字就类似struct的位段，表示这个变量占几位，这里面申明了两个头部`easyroute_head`和`easyroute_port` ， `easyroute_head`包括了前导码和计数值，`easyroute_port`就是下一跳的port口
 
 #### 报文头部有效性判断
 
@@ -116,9 +116,20 @@ control egress {
 > 
 > • valid: Only applicable to packet header fields or header instances (not metadata fields), the table entry must specify a value of true (the field is valid) or false (the field is not valid) as match criteria.
 
-　　虽然摘取了文档，对于这个valid我也知道是有效的意思，但是这个有效从何而来还有待我后续研究，以后知道了再来修正补充吧
+　　虽然摘取了文档，对于这个valid我也知道是有效的意思，但是这个有效从何而来，这个在文档的后面还有补充解释，
 
-　　那么现在表项匹配成功，action操作是`_drop`和`route`，这里我理解的是并行执行，后面再介绍。
+> The value of 1 will match when the header is valid; 0 will match when the header is not valid. Note that metadata fields are always valid.
+
+　　所以其实这里判断的就是端口号大于0，在后面的脚本解析中说过了，启动交换机时，自动为每个端口按1、2、3顺序分配了端口号。
+
+　　那么现在表项匹配成功，action操作是`_drop`和`route`，看commands.txt中的定义
+
+```
+table_set_default route_pkt route
+table_add route_pkt _drop 0 =>
+```
+
+　　默认操作是route操作，如果是0则执行drop操作
 
 #### route操作
 
@@ -157,7 +168,7 @@ control egress {
 > 
 > If executed on the ingress pipeline, the packet will continue through the end of the pipeline. A subsequent table may change the value of egress_spec which will override the drop action. The action cannot be overridden in the egress pipeline.  
 
-　　在入口处执行的话会输出到管道末端，如果后续修改了egress_spec就会覆盖这个操作，也就说选择这个操作无效了，在这份代码中，后续操作显然必定会修改目的端口，那么drop操作必然是会无效的，为什么要写drop呢？
+　　在入口处执行的话会输出到管道末端，如果后续修改了egress_spec就会覆盖这个操作，也当然此处不存在这个条件，但是有个问题，valid是判断非0吗，那为何会有0这个可能呢，还要在看看
 
 　　另外表里有个size，是接受报文数量大小限制的意思，文档中描述如下：
 
@@ -175,6 +186,13 @@ control egress {
 
 　　1、 P4是怎么与拓扑进行连接的，怎么知道自己是怎样的拓扑，怎么知道交换机的端口号等信息
 
+　　在后面那篇脚本解析中已经说明了，在启动时创建了拓扑，端口号是自动按照1、2、3顺序分配，固定了启动时拓扑中连接关系读取顺序也就唯一确定了端口号，p4源码将会被解释为json文件，写入交换机中，用来定义交换机。
+
 　　2、 valid是如何判定的，来源是哪里，这个也跟上一个问题有关系
 
+　　这个问题已经在原文中修改回答了，只要端口号大于0就是valid。这个还有疑问，再看看
+
 　　3、 本文还没分析启动脚本和send、receive两个Python脚本，在启动脚本中建立了拓扑关系，需要分析一下
+
+　　在后面已经分析了，顺便附上连接[Source Routing脚本分析](https://wkaa.github.io/2017/08/13/P4-tutorials-Sources-routing-python-ans/)
+
