@@ -65,7 +65,7 @@ register flowlet_id {
 }
 ```
 
-　　width代表位宽，instance_count代表申请多少个单元的空间，这个空间大小8192就对应了map_size的大小(29页，回头再看)
+　　width代表位宽，instance_count代表申请多少个单元的空间，这个空间大小8192就对应了map_size的大小，size是这个表的大小，可以储存多少表项。
 
 #### flowlet表
 

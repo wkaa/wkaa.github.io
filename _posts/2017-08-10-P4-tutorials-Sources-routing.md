@@ -180,7 +180,7 @@ table_add route_pkt _drop 0 =>
 > 
 > • Although size and min_size are optional, failing to specify at least one of them may result in the table being eliminated as the compiler attempts to satisfy the other requirements of the program
 
-　　这里姑且先认为是限制同时可处理的只有一条报文吧。
+　　size是这个表的大小，可以储存多少表项
 
 ## 遗留问题汇总
 
