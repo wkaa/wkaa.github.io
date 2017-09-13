@@ -19,7 +19,7 @@ keywords: PPPoE
 4. Server单播回复PADS返回Session ID建立会话
 ```
 
-### PPPoE帧格式
+## PPPoE帧格式
 
                            1                   2                   3
        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -48,9 +48,9 @@ keywords: PPPoE
 
 　　最后是PPPoE Tag的组织格式，是以一串常见的TLV（类型、长度、值）三元组组成的。
 
-### Discovery阶段
+## Discovery阶段
 
-#### PPPoE Active Discovery Initiation 数据包(PADI)
+### PPPoE Active Discovery Initiation 数据包(PADI)
 
 　　主机发送 DESTINATION_ADDR 为广播地址的 PADI 数据包， CODE 域设置为
 0x09,SESSION_ID 域必须设置为 0x0000。
@@ -82,7 +82,7 @@ keywords: PPPoE
 
 　　0x0101 Service-Name该 TAG 表明后面紧跟的是服务的名称。 TAG_VALUE 是不以 NULL 结束的 UTF-8 字符串。当 TAG_LENGTH为 0时，该 TAG用于表明接受任何服务。使用 Service-Name标签的例子是表明 ISP(Internet 服务提供商)或者一类服务或者服务的质量。
 
-#### PPPoE Active Discovery Offer 数据包(PADO)
+### PPPoE Active Discovery Offer 数据包(PADO)
 
 　　如果接入集线器能够为收到的 PADI 请求提供服务，它将通过发送一个 PADO 数据包来做出应答。 DESTINATION_ADDR 为发送 PADI 的主机的单播地址， CODE 域为0x07,SESSION_ID 域必须设置为 0x0000。
 
@@ -128,7 +128,7 @@ keywords: PPPoE
 
 　　0x0102 AC-Name，该 TAG 表明后面紧跟的字符串唯一地表示了某个特定的接入集线器。它可以是商标、型号以及序列号等信息的集合，或者该接入集线器 MAC 地址的一个简单的 UTF-8 表示。它不以 NULL 来结束。
 
-#### PPPoE Active Discovery Request 数据包(PADR)
+### PPPoE Active Discovery Request 数据包(PADR)
 
 　　由于 PADI 是广播的,主机可能收到不止一个 PADO,它将审查接收到的所有 PADO 并从中选择一个。可以根据其中的 AC-Name 或 PADO 所提供的服务来作出选择。然后主机向选中的访问集中器发送一个 PADR 数据包。其中， DESTINATION_ADDR 域设置为发送 PADO 的接入集线器的单播地址， CODE域设置为 0x19， SESSION_ID 必须设置为 0x0000。
 
@@ -154,7 +154,7 @@ keywords: PPPoE
       |      TAG_TYPE = 0x0101        |    TAG_LENGTH = 0x0000        |
       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-#### PPPoE Active Discovery Session-confirmation 数据包(PADS)
+### PPPoE Active Discovery Session-confirmation 数据包(PADS)
 
 　　当接入集线器收到一个 PADR 数据包，它就准备开始一个 PPP 会话。它为 PPPoE 会话创 建一个唯一的SESSION_ID 并用一个PADS数据包来给主机作出响应 。
 
@@ -185,7 +185,7 @@ keywords: PPPoE
       |      TAG_TYPE = 0x0101        |    TAG_LENGTH = 0x0000        |
       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-### PPP会话阶段
+## PPP会话阶段
 
 　　完成以上的步骤后建立了PPPoE会话，之后就可以使用PPP建立会话开始通信，这个之后进行介绍
 
